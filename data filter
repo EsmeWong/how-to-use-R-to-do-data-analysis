@@ -1,0 +1,57 @@
+**分割数据**
+
+有以下几个方法：
+#生成数据
+df<-data.frame(
+a=c(1,2),
+b=c("a_c","b_c")
+)
+> df
+a b
+1 a_c
+2 a_c
+1.直接分列，再赋值原数据框新列，对于一列分成两列或者较少列比较适合，当分成列数较多时候，需要一个一个赋值，就比较繁琐了
+
+library(stringr)
+#分列
+split_b<-str_split(df$b,"_")
+b<-sapply(split_b,"[",1)
+c<-sapply(split_b,"[",2)
+
+> b
+[1] "a" "a"
+> c
+[1] "b" "c"
+
+#新的列
+df$b<-b
+df$c<-c
+> df
+a b c
+1 a b
+2 a c
+
+2.使用tidyr包
+
+library(tidyr)
+df<-separate(df,b,into = c("b","c"),sep = "_")
+
+> df
+a b c
+1 a b
+2 a c
+
+对比两个方法，使用tidyr包简直太方便了，一句代码就完成了分列，而直接分列则太繁琐了，强烈推荐使用tidyr包
+
+PS：separate函数用法
+#separate函数用法
+separate(data, col, into, sep = "[^[:alnum:]]+", remove = TRUE,
+convert = FALSE, extra = "warn", fill = "warn", ...)
+
+主要参数：
+data：需要分列的数据框
+col：分列列名
+into：分列后新的列名（文本向量）
+sep：分割符号
+remove：逻辑值，输出时是否移去分列列
+...
