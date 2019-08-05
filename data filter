@@ -58,3 +58,8 @@ remove：逻辑值，输出时是否移去分列列
 
 ***合并数据***
 http://www.sohu.com/a/119237833_468636
+
+***过滤数据***
+【R语言】必学包之dplyr包https://blog.csdn.net/wltom1985/article/details/54973811
+ 过滤数据可使用filter（.data, ）或select（.data, ）
+ 取交集可讲条件使用&或逗号分隔，如取并集使用|
